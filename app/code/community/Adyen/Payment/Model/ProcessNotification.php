@@ -840,7 +840,7 @@ class Adyen_Payment_Model_ProcessNotification extends Mage_Core_Model_Abstract
         $_paymentCode = $this->_paymentMethodCode($order);
 
         // for boleto and multibanco confirmation mail is send on order creation
-        if (!in_array($payment_method, array('adyen_boleto', 'adyen_multibanco'))) {
+        if (!in_array($payment_method, array('adyen_boleto', 'adyen_multibanco')) && round($order->getBaseGrandTotal(), 2) == round($order->getBaseTotalPaid(), 2)) {
             // send order confirmation mail after invoice creation so merchant can add invoicePDF to this mail
             $order->sendNewOrderEmail(); // send order email
         }
